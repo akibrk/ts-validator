@@ -1,8 +1,9 @@
 {
-  "name": "validatets",
+  "name": "@akibkhan/validatets",
   "version": "1.0.0",
   "description": "Lightweight validation framework for typescript",
-  "main": "dist/index",
+  "main": "dist/index.js",
+  "bin": "dist/index.js",
   "scripts": {
     "test": "jest",
     "build:dev": "nodemon src/index.ts",
@@ -11,14 +12,25 @@
   },
   "keywords": [
     "typescript",
-    "validation"
+    "validation",
+    "ts",
+    "validator",
+    "schema validation"
   ],
   "author": {
     "name": "Akib Khan",
     "email": "akib@xnzark.com",
     "url": "https://www.github.com/akibrk"
   },
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akibrk/validatets"
+  },
+  "bugs": {
+    "url": "https://github.com/akibrk/validatets/issues"
+  },
+  "homepage": "https://github.com/akibrk/validatets#readme",
+  "license": "MIT",
   "devDependencies": {
     "jest": "^26.6.3",
     "ts-node": "^9.1.1",
