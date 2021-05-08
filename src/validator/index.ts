@@ -1,10 +1,16 @@
-import IValidateModel from 'interfaces/IValidateModel';
-import IValidateThis from 'interfaces/IValidateThis';
-import IValidationError from 'interfaces/IValidationError';
-import { Vtype } from 'types/vt';
+import IValidateModel from '../interfaces/IValidateModel';
+import IValidateThis from '../interfaces/IValidateThis';
+import IValidationError from '../interfaces/IValidationError';
+import { Vtype } from '../types/vt';
 
 
-
+/**
+ * Validates single property against a validation model
+ * @param obj to validate
+ * @param propName name of the property
+ * @param model Validation Model
+ * @returns IValidationerror | undefined
+ */
 function validateThis(obj: any, propName:string, model: IValidateThis): IValidationError | undefined{
     let vError: IValidationError = {
         field: propName,
@@ -112,7 +118,12 @@ function validateThis(obj: any, propName:string, model: IValidateThis): IValidat
     return vError;
 }
 
-
+/**
+ * Validates any object against a validation model
+ * @param obj to validate
+ * @param model to validate against
+ * @returns IValidationError[]
+ */
 export function validate(obj: any, model: IValidateModel): IValidationError[]{
     let errors: IValidationError[] = [];
 
