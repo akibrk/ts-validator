@@ -14,12 +14,11 @@ describe('String validation', () => {
     }
 
     const T_VALUE: any = {
-        email: 'Akib'
+        email: 'akib@xnzark.com'
     }
 
     it('should validate email requirement', ()=>{
         const errors = validate(T_VALUE, T_MODEL);
-        console.log(errors); 
         expect(errors.length).toBe(0);
     })
 
