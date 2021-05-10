@@ -10,14 +10,21 @@ describe('String validation', () => {
         name:{
             type: Vtype.string,
             required: true,
+            minLength: 4,
+            maxLength: 100
         }
     }
 
     const T_VALUE: any = {
-        name: 'Akib'
+        email: 'Akib'
     }
 
-    it('should validate string requirement', ()=>{
+    it('should validate email requirement', ()=>{
         expect(validate(T_VALUE, T_MODEL).length).toBe(0);
     })
+
+
+    
+
+
 })
