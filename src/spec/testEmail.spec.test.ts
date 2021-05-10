@@ -8,7 +8,7 @@ describe('String validation', () => {
 
     const T_MODEL: IValidateModel = {
         name:{
-            type: Vtype.string,
+            type: Vtype.email,
             required: true,
             minLength: 4,
             maxLength: 100
