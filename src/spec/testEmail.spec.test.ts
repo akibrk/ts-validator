@@ -1,13 +1,11 @@
-import {validate} from '../validator'
-import {IValidateModel} from '../interfaces'
-import { Vtype } from '../types/vt';
+import {IValidateModel, Vtype, validate} from "../index"
 describe('String validation', () => {
     it('should pass', ()=>{
         expect(1+1).toBe(2);
     })
 
     const T_MODEL: IValidateModel = {
-        name:{
+        email:{
             type: Vtype.email,
             required: true,
             minLength: 4,
@@ -20,7 +18,9 @@ describe('String validation', () => {
     }
 
     it('should validate email requirement', ()=>{
-        expect(validate(T_VALUE, T_MODEL).length).toBe(0);
+        const errors = validate(T_VALUE, T_MODEL);
+        console.log(errors); 
+        expect(errors.length).toBe(0);
     })
 
 
