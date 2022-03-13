@@ -1,5 +1,5 @@
 {
-  "name": "@akibrk/ts-validator",
+  "name": "@akibrk/validator",
   "version": "1.0.0",
   "description": "Lightweight validation framework for typescript",
   "main": "dist/index.js",
