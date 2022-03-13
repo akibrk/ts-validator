@@ -7,8 +7,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "clean": "rm -rf dist",
-    "test": "jest",
-    "test:clean": "npm run clean && jest",
+    "test": "npm run clean && jest",
     "build:dev": "nodemon src/index.ts",
     "build": "npm run clean && tsc"
   },
