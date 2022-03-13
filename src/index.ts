@@ -1,7 +1,5 @@
-import IValidateModel from './interfaces/IValidateModel';
-import IValidationError from './interfaces/IValidationError';
-import { Vtype } from './types/vt';
-import {validate} from "./validator/index"
+import { ValidateModel, ValidationError } from './interfaces';
+import { Type } from './types';
+import { validate } from './validator/index';
 
-export {IValidateModel, Vtype, IValidationError, validate}
-  
+export { ValidateModel, Type, ValidationError, validate };

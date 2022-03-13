@@ -1,29 +1,24 @@
-import {IValidateModel, Vtype, validate} from "../index"
+import { ValidateModel, Type, validate } from '../index';
 describe('String validation', () => {
-    it('should pass', ()=>{
-        expect(1+1).toBe(2);
-    })
+  it('should pass', () => {
+    expect(1 + 1).toBe(2);
+  });
 
-    const T_MODEL: IValidateModel = {
-        email:{
-            type: Vtype.email,
-            required: true,
-            minLength: 4,
-            maxLength: 100
-        }
-    }
+  const T_MODEL: ValidateModel = {
+    email: {
+      type: Type.email,
+      required: true,
+      minLength: 4,
+      maxLength: 100,
+    },
+  };
 
-    const T_VALUE: any = {
-        email: 'akib@xnzark.com'
-    }
+  const T_VALUE: any = {
+    email: 'akib@xnzark.com',
+  };
 
-    it('should validate email requirement', ()=>{
-        const errors = validate(T_VALUE, T_MODEL);
-        expect(errors.length).toBe(0);
-    })
-
-
-    
-
-
-})
+  it('should validate email requirement', () => {
+    const errors = validate(T_VALUE, T_MODEL);
+    expect(errors.length).toBe(0);
+  });
+});
