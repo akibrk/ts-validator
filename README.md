@@ -1,4 +1,4 @@
-# Validatets
+# Validator
 
 Validate typescript based on models/schema object.
 
@@ -9,7 +9,7 @@ This is not production ready.
 ## Usage
 
 ```ts
-import { ValidateModel, Type, ValidationError, validate } from '@akibkhan/validatets';
+import { ValidateModel, Type, ValidationError, validate } from '@akibrk/validator';
 
 const registerForm: ValidateModel = {
   username: {
