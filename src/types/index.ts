@@ -5,7 +5,7 @@ export enum Type {
   object = 'object',
 }
 
-type ValidationResult = {
+export type ValidationResult = {
   value: boolean;
   error?: string;
   errors?: string[];
