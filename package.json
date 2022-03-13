@@ -18,9 +18,6 @@
     "validator",
     "schema validation"
   ],
-  "publishConfig": {
-    "registry":"https://npm.pkg.github.com"
-  },
   "author": {
     "name": "Akib Khan",
     "email": "packages@akibrk.com",
