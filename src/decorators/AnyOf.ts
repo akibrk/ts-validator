@@ -1,3 +1,5 @@
+import { VError } from '../helper/VError';
+
 export function anyOf(params: []) {
   return function (target: any, propertyName: string) {
     let value: object | string | undefined = undefined;
@@ -9,7 +11,7 @@ export function anyOf(params: []) {
         if (params.find((x) => x == inputValue)) {
           value = inputValue;
         } else {
-          throw new Error('Not supported value');
+          throw new VError(propertyName, 'Not supported value');
         }
       },
     });

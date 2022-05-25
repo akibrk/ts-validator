@@ -1,3 +1,5 @@
+import { VError } from '../helper/VError';
+
 export function minLength(len: number) {
   return function (target: any, propertyName: string) {
     let value: object | string | undefined = undefined;
@@ -7,10 +9,10 @@ export function minLength(len: number) {
       },
       set: (inputValue: any) => {
         if (target.length === undefined) {
-          throw new Error(`This validator is not supported for ${typeof target}`);
+          throw new VError(propertyName, `This validator is not supported for ${typeof target}`);
         }
         if (inputValue.length < len) {
-          throw new Error(`${propertyName} must be greater than ${len}`);
+          throw new VError(propertyName, `${propertyName} must be greater than ${len}`);
         } else {
           value = inputValue;
         }
