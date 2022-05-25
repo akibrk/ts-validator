@@ -8,8 +8,8 @@ export function length(minLen: number, maxLen: number) {
         return value;
       },
       set: (inputValue: any) => {
-        if (target.length === undefined) {
-          throw new VError(propertyName, `This validator is not supported for ${typeof target}`);
+        if (inputValue.length === undefined) {
+          throw new VError(propertyName, `Unsupported input value ${inputValue} for ${typeof target}`);
         }
         if (inputValue.length < minLen || inputValue.length > maxLen) {
           throw new VError(propertyName, `${propertyName} must be between ${minLen}, ${maxLen}`);

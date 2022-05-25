@@ -8,8 +8,8 @@ export function minLength(len: number) {
         return value;
       },
       set: (inputValue: any) => {
-        if (target.length === undefined) {
-          throw new VError(propertyName, `This validator is not supported for ${typeof target}`);
+        if (inputValue.length === undefined) {
+          throw new VError(propertyName, `Unsupported input value ${inputValue} for ${typeof target}`);
         }
         if (inputValue.length < len) {
           throw new VError(propertyName, `${propertyName} must be greater than ${len}`);

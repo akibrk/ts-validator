@@ -28,7 +28,7 @@ describe('String validation', () => {
       const TEST_INSTANCE = new TestDecorator();
     } catch (error) {
       if (error instanceof VError) {
-        console.log(error.field);
+        console.log(error);
       } else {
         console.error(error);
       }
