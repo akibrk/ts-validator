@@ -1,5 +1,5 @@
 import { VError } from '../helper/VError';
-import { ValidateModel, ValidateThis, ValidationError } from '../interfaces';
+import { ValidateModel, ValidationRule, ValidationError } from '../interfaces';
 import { Type } from '../types';
 import { isEmailAddress } from './common';
 
@@ -10,7 +10,7 @@ import { isEmailAddress } from './common';
  * @param rule Validation Rule
  * @returns ValidationError | undefined
  */
-function validateThis(obj: any, propName: string, rule: ValidateThis): ValidationError | undefined {
+export function validateThis(obj: any, propName: string, rule: ValidationRule): ValidationError | undefined {
   let vError: ValidationError = new VError(propName);
 
   // If there isn't a rule defined for the property ignore it

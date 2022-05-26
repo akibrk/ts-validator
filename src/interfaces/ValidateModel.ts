@@ -1,5 +1,5 @@
-import { ValidateThis } from './ValidateThis';
+import { ValidationRule } from './ValidationRule';
 
 export interface ValidateModel {
-  [name: string]: ValidateThis;
+  [name: string]: ValidationRule;
 }

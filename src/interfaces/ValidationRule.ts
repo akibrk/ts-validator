@@ -1,6 +1,6 @@
 import { Type } from '../types';
 
-export interface ValidateThis {
+export interface ValidationRule {
   type: Type;
   required?: boolean;
   allowNull?: boolean;

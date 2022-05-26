@@ -19,3 +19,21 @@ export function isEmailAddress(arg: string): ValidationResult {
     return { value: true };
   }
 }
+
+export function isMobileNumber(arg: string): ValidationResult {
+  if (isNullOrUndefined(arg).value) return { value: false, error: 'Number might be null or undefined' };
+
+  // Normalize the digits
+  arg = arg.trim().replace(' ', '').replace('(', '').replace(')', '').replace('-', '');
+
+  if (arg.length >= 3) {
+    let matches = arg.match(/^\+?[0-9]{3,25}$/)?.length;
+    if (matches && matches > 0) {
+      return { value: true };
+    } else {
+      return { value: false, error: 'Does not match any known number format' };
+    }
+  } else {
+    return { value: false, error: 'Number too short' };
+  }
+}
