@@ -1,14 +1,14 @@
-import { maxLength, VError } from '../../index';
-describe('MaxLength Decorator Test', () => {
+import { length, VError } from '../../index';
+describe('Length Decorator Test', () => {
   it('should pass', () => {
     expect(1 + 1).toBe(2);
   });
 
-  it('Check max pass ', () => {
+  it('Check min-max pass ', () => {
     class CaseClass {
-      @maxLength(100)
+      @length(1, 12)
       public check: string;
-      @maxLength(100)
+      @length(1, 12)
       public checkArray: Array<string>;
       constructor() {
         this.check = 'test';
@@ -20,11 +20,11 @@ describe('MaxLength Decorator Test', () => {
     expect(case_instance).not.toBeUndefined();
   });
 
-  it('Check max fail ', () => {
+  it('Check min-max fail ', () => {
     class CaseClass {
-      @maxLength(0)
+      @length(0, 0)
       public check: string;
-      @maxLength(0)
+      @length(0, 0)
       public checkMinArray: Array<string>;
       constructor() {
         this.check = 'test';

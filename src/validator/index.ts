@@ -1,6 +1,6 @@
 import { ValidateModel, ValidateThis, ValidationError } from '../interfaces';
 import { Type } from '../types';
-import { isEmailAddress } from './utils';
+import { isEmailAddress } from './common';
 
 /**
  * Validates single property against a validation rule
@@ -13,6 +13,8 @@ function validateThis(obj: any, propName: string, rule: ValidateThis): Validatio
   let vError: ValidationError = {
     field: propName,
     errors: [],
+    name: '',
+    message: '',
   };
 
   // If there isn't a rule defined for the property ignore it

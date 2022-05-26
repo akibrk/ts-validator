@@ -14,6 +14,7 @@ describe('AnyOf Decorator Test', () => {
       }
     }
     const case_instance = new CaseClass();
+    expect(case_instance.check).toEqual(200);
     expect(case_instance).not.toBeUndefined();
   });
 

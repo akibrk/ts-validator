@@ -16,6 +16,7 @@ describe('MinLength Decorator Test', () => {
       }
     }
     const case_instance = new CaseClass();
+    expect(case_instance.checkMin).toEqual('test');
     expect(case_instance).not.toBeUndefined();
   });
 

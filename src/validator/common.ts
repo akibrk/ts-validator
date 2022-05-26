@@ -6,7 +6,7 @@ export function isNullOrUndefined(arg: any): ValidationResult {
 }
 
 export function isEmailAddress(arg: string): ValidationResult {
-  if (isNullOrUndefined(arg).value) return isNullOrUndefined(arg);
+  if (isNullOrUndefined(arg).value) return { value: false, error: 'Email might be null or undefined' };
   arg = arg.trim();
 
   const objArr = arg.split('@');
@@ -15,7 +15,7 @@ export function isEmailAddress(arg: string): ValidationResult {
     return { value: false, error: 'Invalid email address' };
   } else if (!objArr[0].length || !(objArr[1].length >= 3)) {
     return { value: false, error: `Invalid address, might be missing username or domain` };
-  }else{
+  } else {
     return { value: true };
-  }  
+  }
 }
