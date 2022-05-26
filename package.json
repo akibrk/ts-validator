@@ -17,7 +17,10 @@
     "validation",
     "ts",
     "validator",
-    "schema validation"
+    "decorator",
+    "schema validation",
+    "decorator validation",
+    "class validation"
   ],
   "author": {
     "name": "Akib Khan",

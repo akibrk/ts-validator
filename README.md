@@ -2,8 +2,6 @@
 
 Validate typescript based on models/schema object.
 
-[Code Coverage](/coverage/lcov-report/index.html)
-
 ## Warning
 
 This is not production ready.
