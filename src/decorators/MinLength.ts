@@ -1,5 +1,10 @@
 import { VError } from '../helper/VError';
 
+/**
+ * Set the minimum length limit
+ * @param len minimum length of a string or array
+ * @returns
+ */
 export function minLength(len: number) {
   len = Math.abs(Math.round(len));
   return function (target: any, propertyName: string) {

@@ -1,5 +1,11 @@
 import { VError } from '../helper/VError';
 
+/**
+ * Restrict length of an array or string
+ * @param minLen Minimum length of array/string
+ * @param maxLen Maximum length of array or string
+ * @returns
+ */
 export function length(minLen: number, maxLen: number) {
   minLen = Math.abs(Math.round(minLen));
   maxLen = Math.abs(Math.round(maxLen));
