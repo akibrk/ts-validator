@@ -1,8 +1,5 @@
 import { validateThis } from '../validator';
-import { VError } from '../helper/VError';
 import { ValidationError, ValidationRule } from '../interfaces';
-import { Type } from '../types';
-import { isEmailAddress } from './common';
 
 type Rule<T> = {
   [key in keyof T]: ValidationRule;
@@ -12,7 +9,14 @@ export class Validator<T> {
   constructor(rules: Rule<T>) {
     this.rules = rules;
   }
-  public validate(payload: any) {
+
+  /**
+   * Validate payload against the model and return the errors
+   * @param payload to validate
+   * @description Returns empty array if there are no errors
+   * @returns ValidationError[]
+   */
+  public validate(payload: any): ValidationError[] {
     let errors: ValidationError[] = [];
 
     for (let prop in this.rules) {
@@ -21,25 +25,15 @@ export class Validator<T> {
         errors.push(propError);
       }
     }
-    console.log(JSON.stringify(errors));
+    return errors;
+  }
+
+  /**
+   * Check whether a payload is valid or not
+   * @param payload to validate
+   * @returns bo0lean
+   */
+  public isValid(payload: any): boolean {
+    return this.validate(payload).length <= 0;
   }
 }
-
-class Login {
-  public email: string = '';
-  public password: string = '';
-}
-
-const loginValidator = new Validator<Login>({
-  email: {
-    type: Type.string,
-    required: true,
-  },
-  password: {
-    type: Type.string,
-  },
-});
-
-loginValidator.validate({
-  email: 'null',
-});

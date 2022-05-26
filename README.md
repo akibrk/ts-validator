@@ -12,10 +12,11 @@ This is not production ready.
 
 ## Usage
 
-There are two main strategies for validation currently available in this library,
+There are three main strategies for validation currently available in this library,
 
 1. Schema Based
-2. Decorator Based
+2. Class Decorator Based
+3. Class Model Based
 
 ---
 
@@ -82,3 +83,28 @@ class CaseClass {
 - minLen
 - maxLen
 - length
+
+---
+
+### 3. Class Model
+
+```ts
+class Login {
+  public email: string = '';
+  public password: string = '';
+}
+
+const loginValidator = new Validator<Login>({
+  email: {
+    type: Type.string,
+    required: true,
+  },
+  password: {
+    type: Type.string,
+  },
+});
+
+loginValidator.validate({
+  email: 'null',
+});
+```
