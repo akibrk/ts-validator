@@ -1,19 +1,17 @@
+import { VError } from '../helper/VError';
 import { ValidateModel, ValidateThis, ValidationError } from '../interfaces';
 import { Type } from '../types';
-import { isEmailAddress } from './utils';
+import { isEmailAddress } from './common';
 
 /**
  * Validates single property against a validation rule
  * @param obj to validate
  * @param propName name of the property
  * @param rule Validation Rule
- * @returns IValidationError | undefined
+ * @returns ValidationError | undefined
  */
 function validateThis(obj: any, propName: string, rule: ValidateThis): ValidationError | undefined {
-  let vError: ValidationError = {
-    field: propName,
-    errors: [],
-  };
+  let vError: ValidationError = new VError(propName);
 
   // If there isn't a rule defined for the property ignore it
   if (!rule) {
