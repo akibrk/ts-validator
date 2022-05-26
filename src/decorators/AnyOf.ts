@@ -1,6 +1,6 @@
 import { VError } from '../helper/VError';
 
-export function anyOf(params: []) {
+export function anyOf(params: any[]) {
   return function (target: any, propertyName: string) {
     let value: object | string | undefined = undefined;
     Object.defineProperty(target, propertyName, {

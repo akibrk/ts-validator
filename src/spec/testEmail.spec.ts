@@ -1,5 +1,5 @@
 import { ValidateModel, Type, validate } from '../index';
-describe('String validation', () => {
+describe('Email validation', () => {
   it('should pass', () => {
     expect(1 + 1).toBe(2);
   });

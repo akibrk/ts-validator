@@ -4,7 +4,7 @@ describe('MaxLength Decorator Test', () => {
     expect(1 + 1).toBe(2);
   });
 
-  it('Check min pass ', () => {
+  it('Check max pass ', () => {
     class CaseClass {
       @maxLength(100)
       public check: string;
@@ -19,7 +19,7 @@ describe('MaxLength Decorator Test', () => {
     expect(case_instance).not.toBeUndefined();
   });
 
-  it('Check min fail ', () => {
+  it('Check max fail ', () => {
     class CaseClass {
       @maxLength(0)
       public check: string;
