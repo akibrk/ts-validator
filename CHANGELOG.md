@@ -1,7 +1,9 @@
 ## Change Log
 
-### Version 1.2.0
+### Version 2.0.0
 
 - Add class decorators
+- Fixes minor bugs
+- Add more test coverage
 
 ### Version 1.0.0
