@@ -1,5 +1,5 @@
-import { minLength, VError } from '../index';
-describe('String validation', () => {
+import { minLength, VError } from '../../index';
+describe('MinLength Decorator Test', () => {
   it('should pass', () => {
     expect(1 + 1).toBe(2);
   });

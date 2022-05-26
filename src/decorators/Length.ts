@@ -1,6 +1,8 @@
 import { VError } from '../helper/VError';
 
 export function length(minLen: number, maxLen: number) {
+  minLen = Math.abs(Math.round(minLen));
+  maxLen = Math.abs(Math.round(maxLen));
   return function (target: any, propertyName: string) {
     let value: object | string | undefined = undefined;
     Object.defineProperty(target, propertyName, {

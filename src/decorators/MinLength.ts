@@ -1,6 +1,7 @@
 import { VError } from '../helper/VError';
 
 export function minLength(len: number) {
+  len = Math.abs(Math.round(len));
   return function (target: any, propertyName: string) {
     let value: object | string | undefined = undefined;
     Object.defineProperty(target, propertyName, {
