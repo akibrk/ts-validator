@@ -1,10 +1,10 @@
-import { ValidateModel, Type, validate } from '../index';
+import { ValidatorSchema, Type, validate } from '../index';
 describe('Email validation', () => {
   it('should pass', () => {
     expect(1 + 1).toBe(2);
   });
 
-  const T_MODEL: ValidateModel = {
+  const T_MODEL: ValidatorSchema = {
     email: {
       type: Type.email,
       required: true,
