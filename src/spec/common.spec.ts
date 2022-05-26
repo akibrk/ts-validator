@@ -1,4 +1,4 @@
-import { isEmailAddress, isNullOrUndefined } from '../validator/common';
+import { isEmailAddress, isNullOrUndefined } from '../rules/common';
 
 describe('Test isEmailAddress common validator', () => {
   it('should pass', () => {

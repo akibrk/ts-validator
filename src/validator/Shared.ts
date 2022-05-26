@@ -1,7 +1,7 @@
-import { VError } from '../helper/VError';
-import { ValidateModel, ValidationRule, ValidationError } from '../interfaces';
-import { Type } from '../types';
-import { isEmailAddress } from './common';
+import { VError } from 'helper/VError';
+import { ValidationRule, ValidationError } from 'interfaces';
+import { isEmailAddress } from 'rules/common';
+import { Type } from 'types';
 
 /**
  * Validates single property against a validation rule
@@ -10,7 +10,7 @@ import { isEmailAddress } from './common';
  * @param rule Validation Rule
  * @returns ValidationError | undefined
  */
-export function validateThis(obj: any, propName: string, rule: ValidationRule): ValidationError | undefined {
+export function validateRule(obj: any, propName: string, rule: ValidationRule): ValidationError | undefined {
   let vError: ValidationError = new VError(propName);
 
   // If there isn't a rule defined for the property ignore it
@@ -103,24 +103,4 @@ export function validateThis(obj: any, propName: string, rule: ValidationRule): 
   }
 
   return vError;
-}
-
-/**
- * Validates any object against a validation rule
- * @param obj to validate
- * @param model to validate against
- * @returns IValidationError[]
- */
-export function validate(obj: any, model: ValidateModel): ValidationError[] {
-  let errors: ValidationError[] = [];
-
-  for (let prop in obj) {
-    const propError = validateThis(obj[prop], prop, model[prop]);
-
-    if (propError && propError.errors.length) {
-      errors.push(propError);
-    }
-  }
-
-  return errors;
 }

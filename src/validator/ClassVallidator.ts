@@ -1,5 +1,5 @@
-import { validateThis } from '../validator';
 import { ValidationError, ValidationRule } from '../interfaces';
+import { validateRule } from './Shared';
 
 type Rule<T> = {
   [key in keyof T]: ValidationRule;
@@ -20,7 +20,7 @@ export class Validator<T> {
     let errors: ValidationError[] = [];
 
     for (let prop in this.rules) {
-      const propError = validateThis(payload[prop], prop, this.rules[prop]);
+      const propError = validateRule(payload[prop], prop, this.rules[prop]);
       if (propError && propError.errors.length) {
         errors.push(propError);
       }
