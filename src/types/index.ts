@@ -3,6 +3,7 @@ export enum Type {
   number = 'number',
   email = 'email',
   object = 'object',
+  array = 'array',
 }
 
 export type ValidationResult = {

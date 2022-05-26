@@ -1,6 +1,6 @@
 # Validator
 
-Validate typescript based on models/schema object or class decorators!
+Validate typescript based on schema, class models or decorators!
 
 ## Release Notes
 
@@ -12,19 +12,20 @@ This is not production ready.
 
 ## Usage
 
-There are two main strategies for validation currently available in this library,
+There are three main strategies for validation currently available in this library,
 
 1. Schema Based
-2. Decorator Based
+2. Class Decorator Based
+3. Class Model Based
 
 ---
 
 ### 1. Schema Based
 
 ```ts
-import { ValidateModel, Type, ValidationError, validate } from '@akibrk/validator';
+import { ValidatorSchema, Type, ValidationError, validate } from '@akibrk/validator';
 
-const registerForm: ValidateModel = {
+const registerForm: ValidatorSchema = {
   username: {
     type: Type.string,
     minLength: 4,
@@ -82,3 +83,30 @@ class CaseClass {
 - minLen
 - maxLen
 - length
+
+---
+
+### 3. Class Model
+
+```ts
+import { Validator } from '@akibrk/validator';
+
+class Login {
+  public email: string = '';
+  public password: string = '';
+}
+
+const loginValidator = new Validator<Login>({
+  email: {
+    type: Type.string,
+    required: true,
+  },
+  password: {
+    type: Type.string,
+  },
+});
+
+loginValidator.validate({
+  email: 'null',
+});
+```

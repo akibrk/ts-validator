@@ -1,4 +1,4 @@
 export * from './PropertyError';
-export * from './ValidateModel';
-export * from './ValidateThis';
+export * from './ValidatorSchema';
+export * from './ValidationRule';
 export * from './ValidationError';

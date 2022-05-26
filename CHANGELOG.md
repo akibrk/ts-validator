@@ -1,5 +1,9 @@
 ## Change Log
 
+### 27/2022 Version 2.2.0
+
+- Add new class based validation
+
 ### 5/26/2022 Version 2.1.0
 
 - Add new class decorators
