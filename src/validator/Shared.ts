@@ -1,7 +1,7 @@
-import { VError } from 'helper/VError';
-import { ValidationRule, ValidationError } from 'interfaces';
-import { isEmailAddress } from 'rules/common';
-import { Type } from 'types';
+import { VError } from '../helper/VError';
+import { ValidationRule, ValidationError } from '../interfaces';
+import { isEmailAddress } from '../rules/common';
+import { Type } from '../types';
 
 /**
  * Validates single property against a validation rule

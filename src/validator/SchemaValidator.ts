@@ -1,16 +1,16 @@
-import { ValidateModel, ValidationError } from '../interfaces';
+import { ValidationError, ValidatorSchema } from '../interfaces';
 import { validateRule } from './Shared';
 
 /**
- * Validates any object against a validation rule
+ * Validates any object against a ValidatorSchema
  * @param obj to validate
- * @param model to validate against
+ * @param schema to validate against
  * @returns ValidationError[]
  */
-export function validate(obj: any, model: ValidateModel): ValidationError[] {
+export function validate(obj: any, schema: ValidatorSchema): ValidationError[] {
   let errors: ValidationError[] = [];
   for (let prop in obj) {
-    const propError = validateRule(obj[prop], prop, model[prop]);
+    const propError = validateRule(obj[prop], prop, schema[prop]);
     if (propError && propError.errors.length) {
       errors.push(propError);
     }
