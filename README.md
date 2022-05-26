@@ -12,6 +12,15 @@ This is not production ready.
 
 ## Usage
 
+There are two main strategies for validation currently available in this library,
+
+1. Schema Based
+2. Decorator Based
+
+---
+
+### 1. Schema Based
+
 ```ts
 import { ValidateModel, Type, ValidationError, validate } from '@akibrk/validator';
 
@@ -39,3 +48,37 @@ const formData: any = {
 
 validate(formData, registerForm);
 ```
+
+### 2. Decorator Based
+
+Before using decorators please check your ts.config file to see if the decorator is enabled under compiler options `"experimentalDecorators": true`
+
+As of May,22 it's still in experimental flag
+
+```ts
+class CaseClass {
+  @between(1, 122.33)
+  public check: number;
+
+  @isEmail()
+  public email: string;
+
+  @required()
+  public acceptTerms: boolean;
+
+  constructor() {
+    this.check = AMOUNT;
+    this.email = 'contact@akibrk.com';
+    this.acceptTerms = true;
+  }
+}
+```
+
+#### Available decorators
+
+- required
+- isEmail
+- between
+- minLen
+- maxLen
+- length
