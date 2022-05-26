@@ -1,6 +1,10 @@
 # Validator
 
-Validate typescript based on models/schema object.
+Validate typescript based on models/schema object or class decorators!
+
+## Release Notes
+
+[Read here](./CHANGELOG.md)
 
 ## Warning
 
