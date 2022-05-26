@@ -1,4 +1,4 @@
-import { isEmailAddress } from 'validator/common';
+import { isEmailAddress } from '../validator/common';
 import { VError } from '../helper/VError';
 
 /**
