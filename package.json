@@ -8,8 +8,8 @@
   "scripts": {
     "clean": "rm -rf dist",
     "test": "npm run clean && jest",
-    "build:dev": "nodemon src/index.ts",
     "build": "npm run clean && tsc",
+    "build:dev": "nodemon src/index.ts",
     "coverage": "npm run clean && jest --coverage"
   },
   "keywords": [
