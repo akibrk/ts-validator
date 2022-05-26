@@ -1,6 +1,6 @@
 {
   "name": "@akibrk/validator",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Lightweight validation framework for typescript",
   "main": "dist/index.js",
   "bin": "dist/index.js",
