@@ -1,5 +1,10 @@
 import { VError } from '../helper/VError';
 
+/**
+ * Set the maximum length limit
+ * @param len maximum length of a string or array
+ * @returns
+ */
 export function maxLength(len: number) {
   len = Math.abs(Math.round(len));
   return function (target: any, propertyName: string) {
