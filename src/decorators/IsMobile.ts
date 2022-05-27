@@ -1,12 +1,12 @@
-import { isEmailAddress } from '../validator/Shared';
+import { isMobileNumber } from '../validator/Shared';
 import { VError } from '../helper/VError';
 
 /**
- * Validates an email address
- * @param maxLength maximum length of the email
+ * Validates a mobile number
+ * @param maxLength maximum length of the number
  * @returns
  */
-export function isEmail(maxLength?: number) {
+export function isMobile(maxLength?: number) {
   return function (target: any, propertyName: string) {
     let value: string;
     Object.defineProperty(target, propertyName, {
@@ -14,13 +14,13 @@ export function isEmail(maxLength?: number) {
         return value;
       },
       set: (inputValue: string) => {
-        const validationResult = isEmailAddress(inputValue);
+        const validationResult = isMobileNumber(inputValue);
         if (validationResult.value) {
           if (maxLength) {
             if (inputValue.length <= maxLength) {
               value = inputValue;
             } else {
-              throw new VError(propertyName, `Email cannot be longer than ${maxLength}`);
+              throw new VError(propertyName, `Number cannot be longer than ${maxLength}`);
             }
           } else {
             value = inputValue;

@@ -1,43 +1,44 @@
-import { isEmail, VError } from '../../index';
-describe('IsEmail Decorator Test', () => {
+import { isMobile, VError } from '../../index';
+describe('IsMobile Decorator Test', () => {
   it('should pass', () => {
     expect(1 + 1).toBe(2);
   });
 
-  it('A valid email', () => {
+  it('A valid number', () => {
+    const VALID_MOBILE = '+880 19019';
     class CaseClass {
-      @isEmail()
+      @isMobile()
       public check: string;
       constructor() {
-        this.check = 'test@akibrk.com';
+        this.check = VALID_MOBILE;
       }
     }
     const case_instance = new CaseClass();
-    expect(case_instance.check).toEqual('test@akibrk.com');
+    expect(case_instance.check).toEqual(VALID_MOBILE);
     expect(case_instance).not.toBeUndefined();
   });
 
-  it('Valid email length', () => {
-    const EMAIL = 't@akibrk.com';
+  it('Valid number length', () => {
+    const VALID_MOBILE = '+880 19019';
     class CaseClass {
-      @isEmail(12)
+      @isMobile(12)
       public check: string;
       constructor() {
-        this.check = EMAIL;
+        this.check = VALID_MOBILE;
       }
     }
     const case_instance = new CaseClass();
-    expect(case_instance.check).toEqual(EMAIL);
+    expect(case_instance.check).toEqual(VALID_MOBILE);
     expect(case_instance).not.toBeUndefined();
   });
 
-  it('Invalid email length', () => {
-    const EMAIL = 't@akibrk.com';
+  it('Invalid number length', () => {
+    const VALID_MOBILE = '+880 19019';
     class CaseClass {
-      @isEmail(6)
+      @isMobile(6)
       public check: string;
       constructor() {
-        this.check = EMAIL;
+        this.check = VALID_MOBILE;
       }
     }
     try {
@@ -48,9 +49,9 @@ describe('IsEmail Decorator Test', () => {
     }
   });
 
-  it('An invalid email', () => {
+  it('An invalid number', () => {
     class CaseClass {
-      @isEmail()
+      @isMobile()
       public check: string;
       constructor() {
         this.check = 'test';

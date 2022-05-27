@@ -1,6 +1,5 @@
 import { VError } from '../helper/VError';
 import { ValidationRule, ValidationError } from '../interfaces';
-import { isEmailAddress } from '../rules/common';
 import { Type } from '../types';
 
 /**
@@ -60,6 +59,36 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
         }
       }
       break;
+
+    case Type.mobile:
+      if (typeof obj !== Type.string) {
+        vError.errors.push({
+          message: `Invalid type, expected ${rule.type} got ${typeof obj}`,
+        });
+      } else {
+        const { value, error } = isMobileNumber(obj);
+        if (!value && error) {
+          vError.errors.push({
+            message: error,
+          });
+        }
+
+        if (rule.minLength) {
+          if (obj.length < rule.minLength) {
+            vError.errors.push({
+              message: `Invalid ${rule.type} number, must be equal or longer than ${rule.minLength}`,
+            });
+          }
+        }
+        if (rule.maxLength) {
+          if (obj.length > rule.maxLength) {
+            vError.errors.push({
+              message: `Invalid ${rule.type} number, must be equal or shorter than ${rule.maxLength}`,
+            });
+          }
+        }
+      }
+      break;
     default:
       if (rule.type !== typeof obj) {
         vError.errors.push({
@@ -103,4 +132,54 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
   }
 
   return vError;
+}
+
+import { ValidationResult } from 'types';
+
+export function isNullOrUndefined(arg: any): ValidationResult {
+  if (arg == null || arg == undefined) return { value: true, error: 'Invalid' };
+  return { value: false };
+}
+
+/**
+ * Checks if a string is email or not
+ * @param arg string
+ * @returns ValidationResult
+ */
+export function isEmailAddress(arg: string): ValidationResult {
+  if (isNullOrUndefined(arg).value) return { value: false, error: 'Email might be null or undefined' };
+  arg = arg.trim();
+
+  const objArr = arg.split('@');
+
+  if (objArr.length !== 2) {
+    return { value: false, error: 'Invalid email address' };
+  } else if (!objArr[0].length || !(objArr[1].length >= 3)) {
+    return { value: false, error: `Invalid address, might be missing username or domain` };
+  } else {
+    return { value: true };
+  }
+}
+
+/**
+ * Checks if a number is valid or not
+ * @param arg string
+ * @returns ValidationResult
+ */
+export function isMobileNumber(arg: string): ValidationResult {
+  if (isNullOrUndefined(arg).value) return { value: false, error: 'Number might be null or undefined' };
+
+  // Normalize the digits
+  arg = arg.trim().replace(/ /g, '').replace(/-/g, '').replace(/\(/g, '').replace(/\)/g, '');
+
+  if (arg.length >= 3) {
+    let matches = arg.match(/^\+?[0-9]{3,25}$/)?.length;
+    if (matches && matches > 0) {
+      return { value: true };
+    } else {
+      return { value: false, error: 'Does not match any known number format' };
+    }
+  } else {
+    return { value: false, error: 'Number too short' };
+  }
 }

@@ -1,5 +1,9 @@
 ## Change Log
 
+### 27/2022 Version 2.2.1
+
+- Add mobile number validation rule
+
 ### 27/2022 Version 2.2.0
 
 - Add new class based validation
