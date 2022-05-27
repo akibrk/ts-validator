@@ -5,3 +5,4 @@ export * from './MaxLength';
 export * from './Required';
 export * from './IsEmail';
 export * from './Between';
+export * from './IsMobile';

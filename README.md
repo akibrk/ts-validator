@@ -82,6 +82,7 @@ class CaseClass {
 - minLength
 - maxLength
 - length
+- isMobile
 
 ---
 
