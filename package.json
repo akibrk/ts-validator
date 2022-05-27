@@ -10,7 +10,8 @@
     "test": "npm run clean && jest",
     "build": "npm run clean && tsc",
     "build:dev": "nodemon src/index.ts",
-    "coverage": "npm run clean && jest --coverage"
+    "coverage": "npm run clean && jest --coverage",
+    "prepublish": "npm run test && npm run build"
   },
   "keywords": [
     "typescript",
