@@ -6,10 +6,6 @@ Validate typescript based on schema, class models or decorators!
 
 [Read here](./CHANGELOG.md)
 
-## Warning
-
-This is not production ready.
-
 ## Usage
 
 There are three main strategies for validation currently available in this library,
@@ -54,9 +50,12 @@ validate(formData, registerForm);
 
 Before using decorators please check your ts.config file to see if the decorator is enabled under compiler options `"experimentalDecorators": true`
 
-As of May,22 it's still in experimental flag
+As of May,22 it's still in experimental flag.
+
+**Limitations**: You cannot apply multiple decorator to same property at the moment, I will try to get that working next.
 
 ```ts
+import { between, isEmail, required } from '@akibrk/validator';
 class CaseClass {
   @between(1, 122.33)
   public check: number;
@@ -80,8 +79,8 @@ class CaseClass {
 - required
 - isEmail
 - between
-- minLen
-- maxLen
+- minLength
+- maxLength
 - length
 
 ---

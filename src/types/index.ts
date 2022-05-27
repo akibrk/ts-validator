@@ -4,6 +4,7 @@ export enum Type {
   email = 'email',
   object = 'object',
   array = 'array',
+  mobile = 'mobile',
 }
 
 export type ValidationResult = {
