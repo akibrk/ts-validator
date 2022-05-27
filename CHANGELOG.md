@@ -1,10 +1,14 @@
 ## Change Log
 
-### 27/2022 Version 2.2.1
-
-- Add mobile number validation rule
-
 ### 27/2022 Version 2.2.0
+
+- Fix interface import
+
+### 27/2022 Version 2.1.2
+
+- Minor fixes
+
+### 27/2022 Version 2.1.1
 
 - Add new class based validation
 
