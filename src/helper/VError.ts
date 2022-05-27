@@ -1,4 +1,4 @@
-import { PropertyError, ValidationError } from 'interfaces';
+import { PropertyError, ValidationError } from '../interfaces';
 
 export class VError implements ValidationError {
   field: string;
