@@ -74,4 +74,36 @@ describe('Email validation', () => {
     const errors = validate(T_VALUE, T_MODEL);
     expect(errors.length).toBe(1);
   });
+
+  it('Should validate boolean error', () => {
+    const T_MODEL: ValidatorSchema = {
+      enable2FA: {
+        type: Type.boolean,
+        required: true,
+      },
+    };
+
+    const T_VALUE: any = {
+      enable2FA: 'string',
+    };
+
+    const errors = validate(T_VALUE, T_MODEL);
+    expect(errors.length).toBe(1);
+  });
+
+  it('Should validate boolean true', () => {
+    const T_MODEL: ValidatorSchema = {
+      enable2FA: {
+        type: Type.boolean,
+        required: true,
+      },
+    };
+
+    const T_VALUE: any = {
+      enable2FA: true,
+    };
+
+    const errors = validate(T_VALUE, T_MODEL);
+    expect(errors.length).toBe(0);
+  });
 });

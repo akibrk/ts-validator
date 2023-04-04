@@ -1,4 +1,5 @@
 export enum Type {
+  boolean = 'boolean',
   string = 'string',
   number = 'number',
   email = 'email',
