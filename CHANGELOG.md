@@ -1,5 +1,10 @@
 ## Change Log
 
+
+### 7/14/2022 Version 2.2.1
+
+- Fix array validation
+
 ### 27/2022 Version 2.2.0
 
 - Fix interface import

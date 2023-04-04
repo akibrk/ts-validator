@@ -13,19 +13,16 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
   let vError: ValidationError = new VError(propName);
 
   // If there isn't a rule defined for the property ignore it
-  if (!rule) {
-    return rule;
-  }
-
-  if (rule.allowNull) {
+  if (!rule || rule.allowNull) {
     return undefined;
   }
 
   if (rule.required) {
-    if (typeof obj === undefined || typeof obj === null) {
+    if (!obj || typeof obj === 'undefined') {
       vError.errors.push({
         message: `Field is required, missing field: ${propName}`,
       });
+      return vError;
     }
   }
 
@@ -59,7 +56,6 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
         }
       }
       break;
-
     case Type.mobile:
       if (typeof obj !== Type.string) {
         vError.errors.push({
@@ -89,49 +85,84 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
         }
       }
       break;
+    case Type.array:
+      if (typeof obj !== 'object') {
+        vError.errors.push({
+          message: `Invalid type, expected ${rule.type} got ${obj === null ? 'null' : typeof obj}`,
+        });
+      }
+      if (rule.minLength) {
+        if (obj.length < rule.minLength) {
+          vError.errors.push({
+            message: `Invalid '${propName}', must be equal or longer than ${rule.minLength}`,
+          });
+        }
+      }
+
+      if (rule.maxLength) {
+        if (obj.length > rule.maxLength) {
+          vError.errors.push({
+            message: `Invalid '${propName}', must be equal or shorter than ${rule.maxLength}`,
+          });
+        }
+      }
+      break;
+    case Type.string:
+      if (rule.type !== typeof obj) {
+        vError.errors.push({
+          message: `Invalid type, expected ${rule.type} got ${obj === null ? 'null' : typeof obj}`,
+        });
+        break;
+      }
+
+      if (rule.minLength) {
+        if (obj.length < rule.minLength) {
+          vError.errors.push({
+            message: `Invalid '${propName}', must be equal or longer than ${rule.minLength}`,
+          });
+        }
+      }
+
+      if (rule.maxLength) {
+        if (obj.length > rule.maxLength) {
+          vError.errors.push({
+            message: `Invalid '${propName}', must be equal or shorter than ${rule.maxLength}`,
+          });
+        }
+      }
+      break;
+    case Type.number:
+      if (rule.type !== typeof obj) {
+        vError.errors.push({
+          message: `Invalid type, expected ${rule.type} got ${obj === null ? 'null' : typeof obj}`,
+        });
+        break;
+      }
+      if (rule.min) {
+        if (obj < rule.min) {
+          vError.errors.push({
+            message: `Invalid '${propName}', must be equal or larger than ${rule.min}`,
+          });
+        }
+      }
+
+      if (rule.max) {
+        if (obj > rule.max) {
+          vError.errors.push({
+            message: `Invalid '${propName}', must be equal or less than ${rule.max}`,
+          });
+        }
+      }
+      break;
     default:
       if (rule.type !== typeof obj) {
         vError.errors.push({
           message: `Invalid type, expected ${rule.type} got ${obj === null ? 'null' : typeof obj}`,
         });
-      } else {
-        if (rule.type === Type.string) {
-          if (rule.minLength) {
-            if (obj.length < rule.minLength) {
-              vError.errors.push({
-                message: `Invalid '${propName}', must be equal or longer than ${rule.minLength}`,
-              });
-            }
-          }
-
-          if (rule.maxLength) {
-            if (obj.length > rule.maxLength) {
-              vError.errors.push({
-                message: `Invalid '${propName}', must be equal or shorter than ${rule.maxLength}`,
-              });
-            }
-          }
-        } else if (rule.type === Type.number) {
-          if (rule.min) {
-            if (obj < rule.min) {
-              vError.errors.push({
-                message: `Invalid '${propName}', must be equal or larger than ${rule.min}`,
-              });
-            }
-          }
-
-          if (rule.max) {
-            if (obj > rule.max) {
-              vError.errors.push({
-                message: `Invalid '${propName}', must be equal or less than ${rule.max}`,
-              });
-            }
-          }
-        }
       }
   }
 
-  return vError;
+  return vError.errors.length ? vError : undefined;
 }
 
 import { ValidationResult } from 'types';

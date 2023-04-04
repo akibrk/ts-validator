@@ -86,7 +86,7 @@ class CaseClass {
 
 ---
 
-### 3. Class Model
+### 3. Class Model/ Interface
 
 ```ts
 import { Validator } from '@akibrk/validator';
@@ -94,6 +94,13 @@ import { Validator } from '@akibrk/validator';
 class Login {
   public email: string = '';
   public password: string = '';
+}
+
+// Or
+
+interface ILogin {
+  email: string;
+  password: string;
 }
 
 const loginValidator = new Validator<Login>({
