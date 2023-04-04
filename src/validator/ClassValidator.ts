@@ -21,7 +21,7 @@ export class Validator<T> {
 
     for (let prop in this.rules) {
       const propError = validateRule(payload[prop], prop, this.rules[prop]);
-      if (propError && propError.errors.length) {
+      if (propError) {
         errors.push(propError);
       }
     }
