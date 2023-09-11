@@ -4,21 +4,25 @@ import { Type } from '../types';
 
 /**
  * Validates single property against a validation rule
- * @param obj to validate
+ * @param item to validate
  * @param propName name of the property
  * @param rule Validation Rule
  * @returns ValidationError | undefined
  */
-export function validateRule(obj: any, propName: string, rule: ValidationRule): ValidationError | undefined {
+export function validateRule(item: any, propName: string, rule: ValidationRule): ValidationError | undefined {
   let vError: ValidationError = new VError(propName);
 
   // If there isn't a rule defined for the property ignore it
-  if (!rule || rule.allowNull) {
-    return undefined;
-  }
+  if (!rule) return undefined;
+
+  // If null is allowed and the value is null ignore
+  if(rule.allowNull && item === null) return undefined;
+
+  // If note required and the value is undefined ignore
+  if(!rule.required && item === undefined) return undefined;
 
   if (rule.required) {
-    if (!obj || typeof obj === 'undefined') {
+    if (!item || typeof item === 'undefined') {
       vError.errors.push({
         message: `Field is required, missing field: ${propName}`,
       });
@@ -28,12 +32,12 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
 
   switch (rule.type) {
     case Type.email:
-      if (typeof obj !== Type.string) {
+      if (typeof item !== Type.string) {
         vError.errors.push({
-          message: `Invalid type, expected ${rule.type} got ${typeof obj}`,
+          message: `Invalid type, expected ${rule.type} got ${typeof item}`,
         });
       } else {
-        const { value, error } = isEmailAddress(obj);
+        const { value, error } = isEmailAddress(item);
         if (!value && error) {
           vError.errors.push({
             message: error,
@@ -41,14 +45,14 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
         }
 
         if (rule.minLength) {
-          if (obj.length < rule.minLength) {
+          if (item.length < rule.minLength) {
             vError.errors.push({
               message: `Invalid ${rule.type} address, must be equal or longer than ${rule.minLength}`,
             });
           }
         }
         if (rule.maxLength) {
-          if (obj.length > rule.maxLength) {
+          if (item.length > rule.maxLength) {
             vError.errors.push({
               message: `Invalid ${rule.type} address, must be equal or shorter than ${rule.maxLength}`,
             });
@@ -57,12 +61,12 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
       }
       break;
     case Type.mobile:
-      if (typeof obj !== Type.string) {
+      if (typeof item !== Type.string) {
         vError.errors.push({
-          message: `Invalid type, expected ${rule.type} got ${typeof obj}`,
+          message: `Invalid type, expected ${rule.type} got ${typeof item}`,
         });
       } else {
-        const { value, error } = isMobileNumber(obj);
+        const { value, error } = isMobileNumber(item);
         if (!value && error) {
           vError.errors.push({
             message: error,
@@ -70,14 +74,14 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
         }
 
         if (rule.minLength) {
-          if (obj.length < rule.minLength) {
+          if (item.length < rule.minLength) {
             vError.errors.push({
               message: `Invalid ${rule.type} number, must be equal or longer than ${rule.minLength}`,
             });
           }
         }
         if (rule.maxLength) {
-          if (obj.length > rule.maxLength) {
+          if (item.length > rule.maxLength) {
             vError.errors.push({
               message: `Invalid ${rule.type} number, must be equal or shorter than ${rule.maxLength}`,
             });
@@ -86,13 +90,13 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
       }
       break;
     case Type.array:
-      if (typeof obj !== 'object') {
+      if (typeof item !== 'object') {
         vError.errors.push({
-          message: `Invalid type, expected ${rule.type} got ${obj === null ? 'null' : typeof obj}`,
+          message: `Invalid type, expected ${rule.type} got ${item === null ? 'null' : typeof item}`,
         });
       }
       if (rule.minLength) {
-        if (obj.length < rule.minLength) {
+        if (item.length < rule.minLength) {
           vError.errors.push({
             message: `Invalid '${propName}', must be equal or longer than ${rule.minLength}`,
           });
@@ -100,7 +104,7 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
       }
 
       if (rule.maxLength) {
-        if (obj.length > rule.maxLength) {
+        if (item.length > rule.maxLength) {
           vError.errors.push({
             message: `Invalid '${propName}', must be equal or shorter than ${rule.maxLength}`,
           });
@@ -108,15 +112,15 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
       }
       break;
     case Type.string:
-      if (rule.type !== typeof obj) {
+      if (rule.type !== typeof item) {
         vError.errors.push({
-          message: `Invalid type, expected ${rule.type} got ${obj === null ? 'null' : typeof obj}`,
+          message: `Invalid type, expected ${rule.type} got ${item === null ? 'null' : typeof item}`,
         });
         break;
       }
 
       if (rule.minLength) {
-        if (obj.length < rule.minLength) {
+        if (item.length < rule.minLength) {
           vError.errors.push({
             message: `Invalid '${propName}', must be equal or longer than ${rule.minLength}`,
           });
@@ -124,7 +128,7 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
       }
 
       if (rule.maxLength) {
-        if (obj.length > rule.maxLength) {
+        if (item.length > rule.maxLength) {
           vError.errors.push({
             message: `Invalid '${propName}', must be equal or shorter than ${rule.maxLength}`,
           });
@@ -132,14 +136,14 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
       }
       break;
     case Type.number:
-      if (rule.type !== typeof obj) {
+      if (rule.type !== typeof item) {
         vError.errors.push({
-          message: `Invalid type, expected ${rule.type} got ${obj === null ? 'null' : typeof obj}`,
+          message: `Invalid type, expected ${rule.type} got ${item === null ? 'null' : typeof item}`,
         });
         break;
       }
       if (rule.min) {
-        if (obj < rule.min) {
+        if (item < rule.min) {
           vError.errors.push({
             message: `Invalid '${propName}', must be equal or larger than ${rule.min}`,
           });
@@ -147,7 +151,7 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
       }
 
       if (rule.max) {
-        if (obj > rule.max) {
+        if (item > rule.max) {
           vError.errors.push({
             message: `Invalid '${propName}', must be equal or less than ${rule.max}`,
           });
@@ -155,9 +159,9 @@ export function validateRule(obj: any, propName: string, rule: ValidationRule): 
       }
       break;
     default:
-      if (rule.type !== typeof obj) {
+      if (rule.type !== typeof item) {
         vError.errors.push({
-          message: `Invalid type, expected ${rule.type} got ${obj === null ? 'null' : typeof obj}`,
+          message: `Invalid type, expected ${rule.type} got ${item === null ? 'null' : typeof item}`,
         });
       }
   }
