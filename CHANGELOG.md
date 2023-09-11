@@ -4,6 +4,11 @@ Changes in the library
 
 ## Version updates
 
+
+### 9/11/2023 Version 2.3.1
+
+- Fix bad npm publish
+
 ### 9/11/2023 Version 2.3.0
 
 - In case a property rule specify the `required` rule, it will be deemed optional
